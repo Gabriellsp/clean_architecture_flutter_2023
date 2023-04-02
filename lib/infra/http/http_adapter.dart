@@ -6,11 +6,11 @@ import 'package:clean_architecture_flutter_2023/data/http/http_type.dart';
 
 class HttpAdapter implements HttpClient {
   final Client _client;
-  final String host = "http://mobiletest.seventh.com.br";
+  final String host = "";
   HttpAdapter(Client client) : _client = client;
   @override
   Future<Map?> request(
-      {required String path,
+      {required String url,
       required HttpType method,
       Map? body,
       Map? headers}) async {
@@ -19,7 +19,6 @@ class HttpAdapter implements HttpClient {
           {'content-type': 'application/json', 'accept': 'application/json'});
     final jsonBody = body != null ? jsonEncode(body) : null;
     var response = Response('', 500);
-    final url = '$host/$path';
     Future<Response>? futureResponse;
     try {
       switch (method) {
@@ -50,6 +49,8 @@ class HttpAdapter implements HttpClient {
         throw HttpError.badRequest;
       case 401:
         throw HttpError.unauthorized;
+      case 403:
+        throw HttpError.forbidden;
       case 404:
         throw HttpError.notFound;
       default:
