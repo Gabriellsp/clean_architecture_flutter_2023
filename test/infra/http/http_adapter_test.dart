@@ -1,7 +1,9 @@
-import 'package:clean_architecture_flutter_2023/data/http/http_client.dart';
-import 'package:clean_architecture_flutter_2023/data/http/http_error.dart';
-import 'package:clean_architecture_flutter_2023/data/http/http_type.dart';
-import 'package:clean_architecture_flutter_2023/infra/http/http_adapter.dart';
+// ignore_for_file: unused_local_variable
+
+import 'package:clean_architecture_flutter_2023/features/data/http/http_client.dart';
+import 'package:clean_architecture_flutter_2023/features/data/http/http_error.dart';
+import 'package:clean_architecture_flutter_2023/features/data/http/http_type.dart';
+import 'package:clean_architecture_flutter_2023/core/http/http_adapter.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
