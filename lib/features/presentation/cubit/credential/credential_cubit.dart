@@ -1,8 +1,10 @@
 import 'dart:io';
 
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
-import 'package:clean_architecture_flutter_2023/features/domain/usecases/google_sign_in_use_case.dart';
 import 'package:equatable/equatable.dart';
+
+import 'package:clean_architecture_flutter_2023/features/domain/usecases/google_sign_in_use_case.dart';
 
 part 'credential_state.dart';
 

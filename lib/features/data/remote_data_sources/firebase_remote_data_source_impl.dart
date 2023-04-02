@@ -1,6 +1,7 @@
 import 'package:clean_architecture_flutter_2023/features/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/firebase_remote_data_source.dart';
 
@@ -46,12 +47,18 @@ class FirebaseRemoteDataSourceImpl extends FirebaseRemoteDataSource {
           usersCollection.doc(uid).set(newUser);
         }
       }).whenComplete(() {
-        print("New User Created Successfully");
+        if (kDebugMode) {
+          print("New User Created Successfully");
+        }
       }).catchError((e) {
-        print("getInitializeCreateCurrentUser ${e.toString()}");
+        if (kDebugMode) {
+          print("getInitializeCreateCurrentUser ${e.toString()}");
+        }
       });
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }
