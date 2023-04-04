@@ -1,7 +1,7 @@
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/widgets/common.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/widgets/header_widget.dart';
-import 'package:clean_architecture_flutter_2023/features/presentation/widgets/theme/custom_button.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

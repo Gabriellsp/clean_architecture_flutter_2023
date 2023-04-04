@@ -13,7 +13,7 @@ class ClientMock extends Mock implements Client {}
 
 void main() {
   late ClientMock client;
-  late HttpClient sut;
+  late IHttpClient sut;
   late String url;
   late Uri uri;
 

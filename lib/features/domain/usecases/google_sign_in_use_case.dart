@@ -1,7 +1,7 @@
-import 'package:clean_architecture_flutter_2023/features/domain/repositories/firebase_repository.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_firebase_repository.dart';
 
 class GoogleSignInUseCase {
-  final FirebaseRepository repository;
+  final IFirebaseRepository repository;
 
   GoogleSignInUseCase({required this.repository});
 

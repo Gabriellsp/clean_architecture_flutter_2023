@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'package:clean_architecture_flutter_2023/features/data/http/http_error.dart';
 import 'package:clean_architecture_flutter_2023/features/data/http/http_type.dart';
 
-class HttpAdapter implements HttpClient {
+class HttpAdapter implements IHttpClient {
   final Client _client;
   final String host = "";
   HttpAdapter(Client client) : _client = client;

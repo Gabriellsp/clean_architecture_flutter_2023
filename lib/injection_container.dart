@@ -1,7 +1,7 @@
-import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/firebase_remote_data_source.dart';
+import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/i_firebase_remote_data_source.dart';
 import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/firebase_remote_data_source_impl.dart';
 import 'package:clean_architecture_flutter_2023/features/data/repositories/firebase_repository_impl.dart';
-import 'package:clean_architecture_flutter_2023/features/domain/repositories/firebase_repository.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_firebase_repository.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/google_sign_in_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,12 +24,12 @@ Future<void> init() async {
     ),
   );
 
-  sl.registerLazySingleton<FirebaseRepository>(
+  sl.registerLazySingleton<IFirebaseRepository>(
     () => FirebaseRepositoryImpl(
       remoteDataSource: sl.call(),
     ),
   );
-  sl.registerLazySingleton<FirebaseRemoteDataSource>(
+  sl.registerLazySingleton<IFirebaseRemoteDataSource>(
     () => FirebaseRemoteDataSourceImpl(
       fireStore: sl.call(),
       auth: sl.call(),
