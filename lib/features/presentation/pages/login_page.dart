@@ -49,12 +49,16 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _bodyWidget(context) => SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 22),
+  Widget _bodyWidget(context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 22),
+        child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               const HeaderWidget(title: 'Login'),
+              const SizedBox(
+                height: 250,
+              ),
               CustomButton(
                 iconButton: Icons.g_mobiledata,
                 titleButton: "Login Google",

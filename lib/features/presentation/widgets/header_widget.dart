@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter_2023/features/presentation/widgets/theme/colors_theme.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/theme/colors_theme.dart';
 import 'package:flutter/material.dart';
 
 class HeaderWidget extends StatelessWidget {
