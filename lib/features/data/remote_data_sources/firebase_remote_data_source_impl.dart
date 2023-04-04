@@ -9,6 +9,7 @@ class FirebaseRemoteDataSourceImpl extends IFirebaseRemoteDataSource {
   final FirebaseFirestore fireStore;
   final FirebaseAuth auth;
   final GoogleSignIn googleSignIn;
+
   FirebaseRemoteDataSourceImpl(
       {required this.fireStore,
       required this.auth,

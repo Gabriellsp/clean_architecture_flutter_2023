@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:clean_architecture_flutter_2023/features/domain/usecases/google_sign_in_use_case.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/usecases/sign_in_use_case.dart';
 
 part 'credential_state.dart';
 
 class CredentialCubit extends Cubit<CredentialState> {
-  final GoogleSignInUseCase googleSignInUseCase;
+  final SignInUseCase googleSignInUseCase;
   CredentialCubit({
     required this.googleSignInUseCase,
   }) : super(CredentialInitial());
@@ -17,7 +17,7 @@ class CredentialCubit extends Cubit<CredentialState> {
   Future<void> googleAuthSubmit() async {
     emit(CredentialLoading());
     try {
-      await googleSignInUseCase.call();
+      await googleSignInUseCase.signIn();
       emit(CredentialSuccess());
     } on SocketException catch (_) {
       emit(CredentialFailure());

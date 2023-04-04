@@ -1,8 +1,8 @@
 import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/i_firebase_remote_data_source.dart';
 import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/firebase_remote_data_source_impl.dart';
-import 'package:clean_architecture_flutter_2023/features/data/repositories/firebase_repository_impl.dart';
-import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_firebase_repository.dart';
-import 'package:clean_architecture_flutter_2023/features/domain/usecases/google_sign_in_use_case.dart';
+import 'package:clean_architecture_flutter_2023/features/data/repositories/login_repository_impl.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_login_repository.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/usecases/sign_in_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,14 +18,14 @@ Future<void> init() async {
     ),
   );
 
-  sl.registerLazySingleton<GoogleSignInUseCase>(
-    () => GoogleSignInUseCase(
-      repository: sl.call(),
+  sl.registerLazySingleton<SignInUseCase>(
+    () => SignInUseCase(
+      loginRepository: sl.call(),
     ),
   );
 
-  sl.registerLazySingleton<IFirebaseRepository>(
-    () => FirebaseRepositoryImpl(
+  sl.registerLazySingleton<ILoginRepository>(
+    () => LoginRepositoryImpl(
       remoteDataSource: sl.call(),
     ),
   );

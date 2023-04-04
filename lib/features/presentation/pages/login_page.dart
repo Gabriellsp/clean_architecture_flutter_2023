@@ -1,7 +1,8 @@
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
-import 'package:clean_architecture_flutter_2023/features/presentation/widgets/common.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/widgets/snackbar_widget.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/widgets/header_widget.dart';
-import 'package:clean_architecture_flutter_2023/features/presentation/widgets/custom_button.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/widgets/button_widget.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,14 +19,15 @@ class LoginPage extends StatelessWidget {
           }
           if (credentialState is CredentialFailure) {
             snackBarNetwork(
-                msg: "Credenciais inválidas! Verifique os campos novamente ...",
+                message:
+                    "Credenciais inválidas! Verifique os campos novamente ...",
                 context: context);
           }
         },
         builder: (context, credentialState) {
           if (credentialState is CredentialLoading) {
-            return Scaffold(
-              body: loadingIndicatorProgressBar(),
+            return const Scaffold(
+              body: ProgressIndicatorWidget(),
             );
           }
           if (credentialState is CredentialSuccess) {

@@ -1,9 +1,9 @@
 import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/i_firebase_remote_data_source.dart';
-import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_firebase_repository.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_login_repository.dart';
 
-class FirebaseRepositoryImpl implements IFirebaseRepository {
+class LoginRepositoryImpl implements ILoginRepository {
   final IFirebaseRemoteDataSource remoteDataSource;
-  FirebaseRepositoryImpl({required this.remoteDataSource});
+  LoginRepositoryImpl({required this.remoteDataSource});
 
   @override
   Future<void> googleAuth() async => remoteDataSource.googleAuth();
