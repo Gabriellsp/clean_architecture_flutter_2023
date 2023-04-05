@@ -1,5 +1,5 @@
-import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/i_firebase_remote_data_source.dart';
-import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/firebase_remote_data_source_impl.dart';
+import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/i_login_remote_data_source.dart';
+import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/login_remote_data_source_impl.dart';
 import 'package:clean_architecture_flutter_2023/features/data/repositories/login_repository_impl.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_login_repository.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/sign_in_use_case.dart';
@@ -29,8 +29,8 @@ Future<void> init() async {
       remoteDataSource: sl.call(),
     ),
   );
-  sl.registerLazySingleton<IFirebaseRemoteDataSource>(
-    () => FirebaseRemoteDataSourceImpl(
+  sl.registerLazySingleton<ILoginRemoteDataSource>(
+    () => LoginRemoteDataSourceImpl(
       fireStore: sl.call(),
       auth: sl.call(),
       googleSignIn: sl.call(),
