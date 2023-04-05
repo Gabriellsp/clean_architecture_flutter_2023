@@ -62,4 +62,13 @@ class LoginRemoteDataSourceImpl extends ILoginRemoteDataSource {
       }
     }
   }
+
+  @override
+  bool userIsAuthenticated() {
+    var isAuthenticated = auth.currentUser != null ? true : false;
+    return isAuthenticated;
+  }
+
+  @override
+  String getCurrentUId() => auth.currentUser!.uid;
 }

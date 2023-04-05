@@ -1,4 +1,6 @@
+import 'package:clean_architecture_flutter_2023/features/presentation/cubit/auth/auth_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/pages/home_page.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/widgets/snackbar_widget.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/widgets/header_widget.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/widgets/button_widget.dart';
@@ -31,25 +33,27 @@ class LoginPage extends StatelessWidget {
             );
           }
           if (credentialState is CredentialSuccess) {
-            // return BlocBuilder<AuthCubit, AuthState>(
-            //   builder: (context, authState) {
-            //     if (authState is Authenticated) {
-            //       return HomePage(uid: authState.uid,);
-            //     } else {
-            //       print("Unauthenticsted");
-            //       return _bodyWidget();
-            //     }
-            //   },
-            // );
+            return BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, authState) {
+                if (authState is Authenticated) {
+                  return HomePage(
+                    uid: authState.uid,
+                  );
+                } else {
+                  print("Unauthenticsted");
+                  return _bodyWidget(context: context);
+                }
+              },
+            );
           }
 
-          return _bodyWidget(context);
+          return _bodyWidget(context: context);
         },
       ),
     );
   }
 
-  Widget _bodyWidget(context) => Padding(
+  Widget _bodyWidget({required BuildContext context}) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 22),
         child: SingleChildScrollView(
           child: Column(

@@ -2,9 +2,15 @@ import 'package:clean_architecture_flutter_2023/features/data/remote_data_source
 import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_login_repository.dart';
 
 class LoginRepositoryImpl implements ILoginRepository {
-  final ILoginRemoteDataSource remoteDataSource;
-  LoginRepositoryImpl({required this.remoteDataSource});
+  final ILoginRemoteDataSource loginRemoteDataSource;
+  LoginRepositoryImpl({required this.loginRemoteDataSource});
 
   @override
-  Future<void> googleAuth() async => remoteDataSource.googleAuth();
+  Future<void> googleAuth() async => loginRemoteDataSource.googleAuth();
+
+  @override
+  bool userIsAuthenticated() => loginRemoteDataSource.userIsAuthenticated();
+
+  @override
+  String getCurrentUId() => loginRemoteDataSource.getCurrentUId();
 }

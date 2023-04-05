@@ -1,9 +1,9 @@
 import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_login_repository.dart';
 
-class SignInUseCase {
+class IsAuthenticatedUseCase {
   final ILoginRepository loginRepository;
 
-  SignInUseCase({required this.loginRepository});
+  IsAuthenticatedUseCase({required this.loginRepository});
 
-  Future<void> call() async => loginRepository.googleAuth();
+  bool call() => loginRepository.userIsAuthenticated();
 }

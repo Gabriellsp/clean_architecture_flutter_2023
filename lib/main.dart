@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter_2023/features/presentation/cubit/auth/auth_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/pages/login_page.dart';
 import 'package:clean_architecture_flutter_2023/on_generate_route.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AuthCubit>(
+          create: (_) => di.sl<AuthCubit>()..initializeApp(),
+        ),
         BlocProvider<CredentialCubit>(
           create: (_) => di.sl<CredentialCubit>(),
         ),

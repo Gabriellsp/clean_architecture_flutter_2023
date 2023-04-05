@@ -1,9 +1,9 @@
 import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_login_repository.dart';
 
-class SignInUseCase {
+class CurrentUidUseCase {
   final ILoginRepository loginRepository;
 
-  SignInUseCase({required this.loginRepository});
+  CurrentUidUseCase({required this.loginRepository});
 
-  Future<void> call() async => loginRepository.googleAuth();
+  String getCurrentUid() => loginRepository.getCurrentUId();
 }
