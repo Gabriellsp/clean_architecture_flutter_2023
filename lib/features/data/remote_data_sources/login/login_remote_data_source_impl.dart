@@ -1,9 +1,9 @@
 import 'package:clean_architecture_flutter_2023/features/data/models/user_model.dart';
+import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/login/i_login_remote_data_source.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/i_login_remote_data_source.dart';
 
 class LoginRemoteDataSourceImpl extends ILoginRemoteDataSource {
   final FirebaseFirestore fireStore;

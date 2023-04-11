@@ -9,18 +9,13 @@ class InitialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (_, __) {},
-      builder: (context, credentialState) {
-        return BlocBuilder<AuthCubit, AuthState>(
-          builder: (context, authState) {
-            if (authState is Authenticated) {
-              return HomePage(uid: authState.uid);
-            } else {
-              return const LoginPage();
-            }
-          },
-        );
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, authState) {
+        if (authState is Authenticated) {
+          return HomePage(uid: authState.uid);
+        } else {
+          return const LoginPage();
+        }
       },
     );
   }
