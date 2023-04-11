@@ -18,6 +18,7 @@ class UsersPage extends StatelessWidget {
         } else if (usersState is UsersLoaded) {
           return _listUsersWidget(
             users: usersState.users,
+            context: context,
           );
         }
         return Text('error!');
@@ -25,7 +26,8 @@ class UsersPage extends StatelessWidget {
     );
   }
 
-  Widget _listUsersWidget({required List<UserEntity> users}) {
+  Widget _listUsersWidget(
+      {required List<UserEntity> users, required BuildContext context}) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 120,
@@ -35,28 +37,33 @@ class UsersPage extends StatelessWidget {
         var user = users[index];
         var listName = user.name.split(" ");
         var name = '${listName.first} ${listName.last}';
-        return Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 80.0,
-                width: 80.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      (user.profileUrl),
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed('/chat');
+          },
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 80.0,
+                  width: 80.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        (user.profileUrl),
+                      ),
+                      fit: BoxFit.contain,
                     ),
-                    fit: BoxFit.contain,
+                    shape: BoxShape.circle,
                   ),
-                  shape: BoxShape.circle,
                 ),
               ),
-            ),
-            Flexible(
-              child: Text(name),
-            ),
-          ],
+              Flexible(
+                child: Text(name),
+              ),
+            ],
+          ),
         );
       },
     );

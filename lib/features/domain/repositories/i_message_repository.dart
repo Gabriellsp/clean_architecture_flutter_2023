@@ -2,4 +2,5 @@ import 'package:clean_architecture_flutter_2023/features/domain/entities/message
 
 abstract class IMessageRepository {
   Stream<List<MessageEntity>> getChatMessages(String channelId);
+  Future<void> sendMessage(MessageEntity message, String channelId);
 }

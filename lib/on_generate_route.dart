@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter_2023/features/presentation/pages/chat_page.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/pages/initial_page.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,10 @@ class OnGenerateRoute {
       case "/login":
         {
           return materialBuilder(widget: const LoginPage());
+        }
+      case "/chat":
+        {
+          return materialBuilder(widget: const ChatPage());
         }
       default:
         return materialBuilder(widget: const ErrorPage());

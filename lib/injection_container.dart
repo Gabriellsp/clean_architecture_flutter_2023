@@ -14,6 +14,7 @@ import 'package:clean_architecture_flutter_2023/features/domain/usecases/current
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/get_all_users_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/get_chat_messages_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/is_authenticated_use_case.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/usecases/send_message_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/sign_in_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/auth/auth_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/chat/chat_cubit.dart';
@@ -49,6 +50,7 @@ Future<void> init() async {
   sl.registerFactory<ChatCubit>(
     () => ChatCubit(
       getChatMessagesUseCase: sl.call(),
+      sendMessageUseCase: sl.call(),
     ),
   );
 
@@ -78,6 +80,12 @@ Future<void> init() async {
 
   sl.registerLazySingleton<GetChatMessagesUseCase>(
     () => GetChatMessagesUseCase(
+      repository: sl.call(),
+    ),
+  );
+
+  sl.registerLazySingleton<SendMessageUseCase>(
+    () => SendMessageUseCase(
       repository: sl.call(),
     ),
   );

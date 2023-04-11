@@ -14,9 +14,27 @@ class MessageRemoteDataSourceImpl implements IMessageRemoteDataSource {
     final messagesRef =
         oneToOneChatChannelRef.doc(channelId).collection("messages");
 
-    return messagesRef.orderBy('time').snapshots().map((querySnap) => querySnap
-        .docs
-        .map((queryDoc) => MessageModel.fromSnapshot(queryDoc))
-        .toList());
+    return messagesRef.orderBy('timestamp').snapshots().map((querySnap) =>
+        querySnap.docs
+            .map((queryDoc) => MessageModel.fromSnapshot(queryDoc))
+            .toList());
+  }
+
+  @override
+  Future<void> sendMessage(MessageEntity message, String channelId) async {
+    final messagesRef = fireStore
+        .collection("chatChannel")
+        .doc(channelId)
+        .collection("messages");
+    final messageId = messagesRef.doc().id;
+    final newMessage = MessageModel(
+      id: messageId,
+      author: message.author,
+      recipient: message.recipient,
+      message: message.message,
+      timestamp: message.timestamp,
+    ).toDocument();
+
+    await messagesRef.doc(messageId).set(newMessage);
   }
 }

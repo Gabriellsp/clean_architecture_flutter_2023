@@ -9,4 +9,8 @@ class MessageRepositoryImpl implements IMessageRepository {
   @override
   Stream<List<MessageEntity>> getChatMessages(String channelId) =>
       messageRemoteDataSource.getMessages(channelId);
+
+  @override
+  Future<void> sendMessage(MessageEntity message, String channelId) async =>
+      await messageRemoteDataSource.sendMessage(message, channelId);
 }
