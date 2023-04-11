@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
             children: [
               Icon(
                 iconButton,
-                color: Colors.black,
+                color: Colors.orange,
               ),
               const SizedBox(
                 width: 8,

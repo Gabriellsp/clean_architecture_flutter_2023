@@ -7,6 +7,7 @@ import 'package:clean_architecture_flutter_2023/features/presentation/widgets/bu
 import 'package:clean_architecture_flutter_2023/features/presentation/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -40,7 +41,6 @@ class LoginPage extends StatelessWidget {
                     uid: authState.uid,
                   );
                 } else {
-                  print("Unauthenticsted");
                   return _bodyWidget(context: context);
                 }
               },
@@ -64,7 +64,7 @@ class LoginPage extends StatelessWidget {
                 height: 250,
               ),
               CustomButton(
-                iconButton: Icons.g_mobiledata,
+                iconButton: FontAwesomeIcons.google,
                 titleButton: "Login Google",
                 onPressed: () {
                   BlocProvider.of<CredentialCubit>(context).googleAuthSubmit();

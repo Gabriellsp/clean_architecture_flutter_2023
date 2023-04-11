@@ -12,7 +12,7 @@ class UserEntity extends Equatable {
   final String dob;
   final String gender;
 
-  UserEntity({
+  const UserEntity({
     this.name = "",
     this.email = "",
     this.phoneNumber = "",
@@ -26,7 +26,6 @@ class UserEntity extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object> get props => [
         name,
         email,
