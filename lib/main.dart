@@ -1,4 +1,5 @@
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/auth/auth_cubit.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/cubit/chat/chat_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/users/users_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/pages/initial_page.dart';
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<UsersCubit>(
           create: (_) => di.sl<UsersCubit>()..getAllUsers(),
+        ),
+        BlocProvider<ChatCubit>(
+          create: (_) => di.sl<ChatCubit>(),
         ),
       ],
       child: MaterialApp(

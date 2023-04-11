@@ -1,6 +1,5 @@
+import 'package:clean_architecture_flutter_2023/features/domain/entities/user_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   const UserModel({
