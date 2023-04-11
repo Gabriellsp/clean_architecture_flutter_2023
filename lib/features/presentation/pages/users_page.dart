@@ -1,4 +1,5 @@
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/users/users_cubit.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/widgets/list_users_widget_dart.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,13 @@ class UsersPage extends StatelessWidget {
             text: 'Carregando usários, favor aguardar ...',
           );
         } else if (usersState is UsersLoaded) {
-          return Text('sucesso! ${usersState.users[0].email}');
+          return SingleChildScrollView(
+            child: Column(children: [
+              ListUsersWidget(
+                users: usersState.users,
+              ),
+            ]),
+          );
         }
         return Text('error!');
       },
