@@ -17,9 +17,6 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<CredentialCubit, CredentialState>(
         listener: (context, credentialState) {
-          if (credentialState is CredentialSuccess) {
-            // BlocProvider.of<AuthCubit>(context).loggedIn();
-          }
           if (credentialState is CredentialFailure) {
             snackBarNetwork(
                 message:

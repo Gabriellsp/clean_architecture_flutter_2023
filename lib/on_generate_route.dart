@@ -1,12 +1,17 @@
+import 'package:clean_architecture_flutter_2023/features/presentation/pages/initial_page.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class OnGenerateRoute {
   static Route<dynamic> route(RouteSettings settings) {
-    final args = settings.arguments;
+    // final args = settings.arguments;
 
     switch (settings.name) {
       case "/":
+        {
+          return materialBuilder(widget: const InitialPage());
+        }
+      case "/login":
         {
           return materialBuilder(widget: const LoginPage());
         }

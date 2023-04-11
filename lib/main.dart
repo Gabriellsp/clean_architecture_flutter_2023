@@ -1,5 +1,6 @@
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/auth/auth_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/pages/initial_page.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/pages/login_page.dart';
 import 'package:clean_architecture_flutter_2023/on_generate_route.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,7 +36,10 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: "/",
         onGenerateRoute: OnGenerateRoute.route,
-        routes: {"/": (context) => const LoginPage()},
+        routes: {
+          "/": (context) => const InitialPage(),
+          "/login": (context) => const LoginPage(),
+        },
       ),
     );
   }
