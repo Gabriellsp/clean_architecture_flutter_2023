@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter_2023/features/domain/entities/engage_user_entity.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/entities/user_entity.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/users/users_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/widgets/progress_indicator_widget.dart';
@@ -5,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsersPage extends StatelessWidget {
-  const UsersPage({Key? key}) : super(key: key);
+  final String currentUid;
+  const UsersPage({Key? key, required this.currentUid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,11 @@ class UsersPage extends StatelessWidget {
         var name = '${listName.first} ${listName.last}';
         return GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed('/chat');
+            Navigator.of(context).pushNamed('/chat',
+                arguments: EngageUserEntity(
+                  currentUidUser: currentUid,
+                  otherUidUser: user.uid,
+                ));
           },
           child: Column(
             children: [

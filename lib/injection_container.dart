@@ -10,6 +10,7 @@ import 'package:clean_architecture_flutter_2023/features/data/repositories/user_
 import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_login_repository.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_message_repository.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/repositories/i_user_repository.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/usecases/create_channel_chat_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/current_uid_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/get_all_users_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/get_chat_messages_use_case.dart';
@@ -19,6 +20,7 @@ import 'package:clean_architecture_flutter_2023/features/domain/usecases/sign_in
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/auth/auth_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/chat/chat_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
+import 'package:clean_architecture_flutter_2023/features/presentation/cubit/message/message_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/users/users_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,7 +51,11 @@ Future<void> init() async {
 
   sl.registerFactory<ChatCubit>(
     () => ChatCubit(
-      getChatMessagesUseCase: sl.call(),
+        getChatMessagesUseCase: sl.call(), createChannelChatUseCase: sl.call()),
+  );
+
+  sl.registerFactory<MessageCubit>(
+    () => MessageCubit(
       sendMessageUseCase: sl.call(),
     ),
   );
@@ -86,6 +92,12 @@ Future<void> init() async {
 
   sl.registerLazySingleton<SendMessageUseCase>(
     () => SendMessageUseCase(
+      repository: sl.call(),
+    ),
+  );
+
+  sl.registerLazySingleton<CreateChannelChatUseCase>(
+    () => CreateChannelChatUseCase(
       repository: sl.call(),
     ),
   );

@@ -25,18 +25,3 @@ class ChatFailure extends ChatState {
   @override
   List<Object> get props => [];
 }
-
-class MessageLoading extends ChatState {
-  @override
-  List<Object> get props => [];
-}
-
-class MessageSuccess extends ChatState {
-  @override
-  List<Object> get props => [];
-}
-
-class MessageFailure extends ChatState {
-  @override
-  List<Object> get props => [];
-}

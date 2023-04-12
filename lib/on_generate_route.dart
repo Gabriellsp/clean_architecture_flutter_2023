@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter_2023/features/domain/entities/engage_user_entity.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/pages/chat_page.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/pages/initial_page.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/pages/login_page.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class OnGenerateRoute {
   static Route<dynamic> route(RouteSettings settings) {
-    // final args = settings.arguments;
+    final args = settings.arguments;
 
     switch (settings.name) {
       case "/":
@@ -18,7 +19,17 @@ class OnGenerateRoute {
         }
       case "/chat":
         {
-          return materialBuilder(widget: const ChatPage());
+          if (args is EngageUserEntity) {
+            return materialBuilder(
+              widget: ChatPage(
+                engageUser: args,
+              ),
+            );
+          } else {
+            return materialBuilder(
+              widget: const ErrorPage(),
+            );
+          }
         }
       default:
         return materialBuilder(widget: const ErrorPage());

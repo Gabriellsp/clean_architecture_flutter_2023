@@ -1,5 +1,6 @@
 import 'package:clean_architecture_flutter_2023/features/data/models/message_model.dart';
 import 'package:clean_architecture_flutter_2023/features/data/remote_data_sources/message/i_message_remote_data_source.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/entities/engage_user_entity.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/entities/message_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,6 +12,7 @@ class MessageRemoteDataSourceImpl implements IMessageRemoteDataSource {
   @override
   Stream<List<MessageEntity>> getMessages(String channelId) {
     final oneToOneChatChannelRef = fireStore.collection("chatChannel");
+
     final messagesRef =
         oneToOneChatChannelRef.doc(channelId).collection("messages");
 
@@ -36,5 +38,41 @@ class MessageRemoteDataSourceImpl implements IMessageRemoteDataSource {
     ).toDocument();
 
     await messagesRef.doc(messageId).set(newMessage);
+  }
+
+  @override
+  Future<String> createChannelChat(EngageUserEntity engageUser) async {
+    final userCollectionRef = fireStore.collection('users');
+
+    final chatChannelRef = fireStore.collection('chatChannel');
+
+    var x = await userCollectionRef
+        .doc(engageUser.currentUidUser)
+        .collection("chatChannel")
+        .doc(engageUser.otherUidUser)
+        .get();
+    var channelId = x.get("channelId");
+    if (channelId != null) return channelId;
+    final chatChannelId = chatChannelRef.doc().id;
+
+    var channel = {'channelId': chatChannelId};
+
+    chatChannelRef.doc(chatChannelId).set(channel);
+
+    //currentUser
+    userCollectionRef
+        .doc(engageUser.currentUidUser)
+        .collection('chatChannel')
+        .doc(engageUser.otherUidUser)
+        .set(channel);
+
+    //otherUser
+    userCollectionRef
+        .doc(engageUser.otherUidUser)
+        .collection('chatChannel')
+        .doc(engageUser.currentUidUser)
+        .set(channel);
+
+    return chatChannelId;
   }
 }
