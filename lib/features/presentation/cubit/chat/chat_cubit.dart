@@ -25,8 +25,10 @@ class ChatCubit extends Cubit<ChatState> {
     emit(ChatLoading());
     try {
       channelId = await _createChannelChatUseCase.call(engageUser);
-      streamMessage = _getChatMessagesUseCase.call(channelId!);
-      emit(ChatLoaded(messages: await streamMessage!.first));
+      final streamResponse = _getChatMessagesUseCase.call(channelId!);
+      streamResponse.listen((messages) {
+        emit(ChatLoaded(messages: messages));
+      });
     } catch (_) {
       emit(ChatFailure());
     }
