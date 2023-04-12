@@ -46,27 +46,26 @@ class MessageRemoteDataSourceImpl implements IMessageRemoteDataSource {
 
     final chatChannelRef = fireStore.collection('chatChannel');
 
-    var x = await userCollectionRef
+    var userChatChannel = await userCollectionRef
         .doc(engageUser.currentUidUser)
         .collection("chatChannel")
         .doc(engageUser.otherUidUser)
         .get();
-    var channelId = x.get("channelId");
-    if (channelId != null) return channelId;
+    var existChat = userChatChannel.exists;
+    if (existChat) return userChatChannel.get('channelId');
+
     final chatChannelId = chatChannelRef.doc().id;
 
     var channel = {'channelId': chatChannelId};
 
     chatChannelRef.doc(chatChannelId).set(channel);
 
-    //currentUser
     userCollectionRef
         .doc(engageUser.currentUidUser)
         .collection('chatChannel')
         .doc(engageUser.otherUidUser)
         .set(channel);
 
-    //otherUser
     userCollectionRef
         .doc(engageUser.otherUidUser)
         .collection('chatChannel')
