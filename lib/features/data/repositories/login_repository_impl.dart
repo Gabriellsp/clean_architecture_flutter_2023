@@ -9,6 +9,9 @@ class LoginRepositoryImpl implements ILoginRepository {
   Future<void> googleAuth() async => loginRemoteDataSource.googleAuth();
 
   @override
+  Future<void> signOut() async => loginRemoteDataSource.signOut();
+
+  @override
   bool userIsAuthenticated() => loginRemoteDataSource.userIsAuthenticated();
 
   @override

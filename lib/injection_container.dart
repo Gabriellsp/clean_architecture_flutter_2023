@@ -17,6 +17,7 @@ import 'package:clean_architecture_flutter_2023/features/domain/usecases/get_cha
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/is_authenticated_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/send_message_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/domain/usecases/sign_in_use_case.dart';
+import 'package:clean_architecture_flutter_2023/features/domain/usecases/sign_out_use_case.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/auth/auth_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/chat/chat_cubit.dart';
 import 'package:clean_architecture_flutter_2023/features/presentation/cubit/credential/credential_cubit.dart';
@@ -34,6 +35,7 @@ Future<void> init() async {
     () => AuthCubit(
       isAuthenticatedUseCase: sl.call(),
       currentUidUseCase: sl.call(),
+      signOutUseCase: sl.call(),
     ),
   );
 
@@ -74,6 +76,12 @@ Future<void> init() async {
 
   sl.registerLazySingleton<SignInUseCase>(
     () => SignInUseCase(
+      loginRepository: sl.call(),
+    ),
+  );
+
+  sl.registerLazySingleton<SignOutUseCase>(
+    () => SignOutUseCase(
       loginRepository: sl.call(),
     ),
   );
@@ -123,8 +131,8 @@ Future<void> init() async {
   sl.registerLazySingleton<ILoginRemoteDataSource>(
     () => LoginRemoteDataSourceImpl(
       fireStore: sl.call(),
-      auth: sl.call(),
-      googleSignIn: sl.call(),
+      authFirebase: sl.call(),
+      authGoogle: sl.call(),
     ),
   );
 

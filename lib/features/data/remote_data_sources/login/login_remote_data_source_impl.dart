@@ -7,29 +7,33 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginRemoteDataSourceImpl extends ILoginRemoteDataSource {
   final FirebaseFirestore fireStore;
-  final FirebaseAuth auth;
-  final GoogleSignIn googleSignIn;
+  final FirebaseAuth authFirebase;
+  final GoogleSignIn authGoogle;
 
   LoginRemoteDataSourceImpl(
       {required this.fireStore,
-      required this.auth,
-      required this.googleSignIn});
+      required this.authFirebase,
+      required this.authGoogle});
 
   @override
   Future<void> googleAuth() async {
     final usersCollection = fireStore.collection("users");
     try {
-      final GoogleSignInAccount? account = await googleSignIn.signIn();
+      final GoogleSignInAccount? account = await authGoogle.signIn();
       final GoogleSignInAuthentication googleAuth =
           await account!.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      final information = (await auth.signInWithCredential(credential)).user;
-      usersCollection.doc(auth.currentUser!.uid).get().then((user) async {
+      final information =
+          (await authFirebase.signInWithCredential(credential)).user;
+      usersCollection
+          .doc(authFirebase.currentUser!.uid)
+          .get()
+          .then((user) async {
         if (!user.exists) {
-          var uid = auth.currentUser!.uid;
+          var uid = authFirebase.currentUser!.uid;
           var newUser = UserModel(
                   name: information!.displayName!,
                   email: information.email!,
@@ -64,11 +68,17 @@ class LoginRemoteDataSourceImpl extends ILoginRemoteDataSource {
   }
 
   @override
+  Future<void> signOut() async {
+    await authFirebase.signOut();
+    await authGoogle.signOut();
+  }
+
+  @override
   bool userIsAuthenticated() {
-    var isAuthenticated = auth.currentUser != null ? true : false;
+    var isAuthenticated = authFirebase.currentUser != null ? true : false;
     return isAuthenticated;
   }
 
   @override
-  String getCurrentUId() => auth.currentUser!.uid;
+  String getCurrentUId() => authFirebase.currentUser!.uid;
 }
