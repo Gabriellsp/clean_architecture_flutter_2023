@@ -16,6 +16,8 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   late ChatCubit _chatCubit;
+  ScrollController listScrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -41,25 +43,32 @@ class _ChatPageState extends State<ChatPage> {
                 Expanded(
                   child: ListView.builder(
                       itemCount: chatState.messages.length,
+                      controller: listScrollController,
                       itemBuilder: (context, index) {
                         var messageData = chatState.messages[index];
                         return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: messageData.author ==
-                                    widget.engageUser.currentUidUser
-                                ? MessageWidget(
-                                    isMyMessage: true,
-                                    message: messageData.message,
-                                  )
-                                : MessageWidget(
-                                    isMyMessage: false,
-                                    message: messageData.message,
-                                  ));
+                          padding: const EdgeInsets.all(8.0),
+                          child: messageData.author ==
+                                  widget.engageUser.currentUidUser
+                              ? MessageWidget(
+                                  isMyMessage: true,
+                                  message: messageData.message,
+                                  showMessageStatus:
+                                      index == chatState.messages.length - 1,
+                                )
+                              : MessageWidget(
+                                  isMyMessage: false,
+                                  message: messageData.message,
+                                  showMessageStatus:
+                                      index == chatState.messages.length - 1,
+                                ),
+                        );
                       }),
                 ),
                 CustomTextfieldWidget(
                   engageUser: widget.engageUser,
                   channelId: _chatCubit.channelId!,
+                  listScrollController: listScrollController,
                 ),
               ],
             );

@@ -7,11 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomTextfieldWidget extends StatefulWidget {
   final EngageUserEntity engageUser;
+  final ScrollController listScrollController;
   final String channelId;
   const CustomTextfieldWidget({
     Key? key,
     required this.engageUser,
     required this.channelId,
+    required this.listScrollController,
   }) : super(key: key);
 
   @override
@@ -84,6 +86,10 @@ class _CustomTextfieldWidgetState extends State<CustomTextfieldWidget> {
                         recipient: widget.engageUser.otherUidUser!,
                       ),
                       widget.channelId);
+                  _messageController!.clear();
+                  final position =
+                      widget.listScrollController.position.maxScrollExtent;
+                  widget.listScrollController.jumpTo(position + 54);
                 }
               },
               child: Container(

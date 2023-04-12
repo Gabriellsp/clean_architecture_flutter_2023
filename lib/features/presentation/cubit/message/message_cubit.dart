@@ -18,7 +18,9 @@ class MessageCubit extends Cubit<MessageState> {
   void sendMessage(MessageEntity message, String channelId) async {
     emit(MessageLoading());
     try {
-      _sendMessageUseCase.call(message, channelId);
+      await _sendMessageUseCase
+          .call(message, channelId)
+          .timeout(const Duration(seconds: 15));
       emit(MessageSuccess());
     } catch (_) {
       emit(MessageFailure());
